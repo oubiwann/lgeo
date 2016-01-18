@@ -48,8 +48,8 @@ There are four main "namespaces" for the lgeo project:
   and ``ogr_srs_api.h``)
 * ``geos``/``geos.*`` - modules for functions from GEOS (specifically, ``geos_c.h``)
 
-Note that it may become necessary in the future to include a fourth: a namespace for
-the PROJ4 library.
+Note that it may become necessary in the future to include additional pseudo-namespaces (e.g., for
+the [PROJ4 library](https://trac.osgeo.org/proj/)).
 
 The LFE NIF wrappers of the form ``lgeo_*`` are not intended to be used directly (though one certianly may do so). It is preferable to use the dotted modules.
 
