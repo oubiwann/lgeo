@@ -30,26 +30,6 @@
   (erlang:nif_error 'nif_not_loaded))
 
 ;; XXX setup alias in separate module
-(defun geosstrtree_create ()
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun geosstrtree_insert (_RTree _Geom _Eterm)
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun geosstrtree_iterate (_RTree)
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun geosstrtree_query (_Rtree _Geom)
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-;; (defun geosstrtree_remove (_RTree _Geom _Eterm)
-;;   (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
 (defun get_centroid (_Geom1)
   (erlang:nif_error 'nif_not_loaded))
 
@@ -68,47 +48,6 @@
 ;; XXX setup alias in separate module
 (defun topology_preserve_simplify (_Geom1 _Tolerance)
   (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun wkbreader_create ()
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun wkbreader_read (_WKBReader _Wkb)
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun wkbreader_readhex (_WKBReader _WkbHex)
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun wkbwriter_create()
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun wkbwriter_write (_WKBWriter _Geom)
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun wkbwriter_writehex (_WKBWriter _Geom)
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun wktreader_create ()
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun wktreader_read (_WKTReader _Wkt)
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun wktwriter_create ()
-  (erlang:nif_error 'nif_not_loaded))
-
-;; XXX setup alias in separate module
-(defun wktwriter_write (_WKTWriter _Geom)
-  (erlang:nif_error 'nif_not_loaded))
-
 
 ; ;; @doc Convert a GeoCouch geometry to a GEOS geometry, validate
 ; ;; the structure of the geometry.
