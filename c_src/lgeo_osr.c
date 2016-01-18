@@ -13,6 +13,10 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
+
+// http://gdal.org/1.11/gdal_8h.html
+// http://gdal.org/1.11/ogr/osr_tutorial.html
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
@@ -69,7 +73,7 @@ unload(ErlNifEnv* env, void* priv_data)
  ***********************************************************************/
 
 /*
-SRS = erlosr:import_from_epsg(4326).
+SRS = lgeo_osr:import_from_epsg(4326).
 <<>>
 */
 static ERL_NIF_TERM
@@ -97,8 +101,8 @@ import_from_epsg(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 }
 
 /*
-SRS = erlosr:import_from_epsg(4326),
-WKT = erlosr:export_to_wkt(SRS).
+SRS = lgeo_osr:import_from_epsg(4326),
+WKT = lgeo_osr:export_to_wkt(SRS).
 "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]]"
 */
 static ERL_NIF_TERM
@@ -125,7 +129,7 @@ export_to_wkt(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 static ErlNifFunc nif_funcs[] =
 {
     {"import_from_epsg", 1, import_from_epsg},
-    {"export_to_wkt", 1, export_to_wkt} 
+    {"export_to_wkt", 1, export_to_wkt}
 };
 
-ERL_NIF_INIT(erlosr, nif_funcs, &load, NULL, NULL, unload);
+ERL_NIF_INIT(lgeo_osr, nif_funcs, &load, NULL, NULL, unload);
