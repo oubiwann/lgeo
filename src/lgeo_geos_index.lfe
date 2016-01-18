@@ -26,21 +26,21 @@
 ;;; NIF functions
 
 ;; XXX setup alias in separate module
-(defun geosstrtree_create ()
+(defun strtree_create ()
   (erlang:nif_error 'nif_not_loaded))
 
 ;; XXX setup alias in separate module
-(defun geosstrtree_insert (_RTree _Geom _Eterm)
+(defun strtree_insert (_RTree _Geom _Eterm)
   (erlang:nif_error 'nif_not_loaded))
 
 ;; XXX setup alias in separate module
-(defun geosstrtree_iterate (_RTree)
+(defun strtree_iterate (_RTree)
   (erlang:nif_error 'nif_not_loaded))
 
 ;; XXX setup alias in separate module
-(defun geosstrtree_query (_Rtree _Geom)
+(defun strtree_query (_Rtree _Geom)
   (erlang:nif_error 'nif_not_loaded))
 
 ;; XXX setup alias in separate module
-;; (defun geosstrtree_remove (_RTree _Geom _Eterm)
+;; (defun strtree_remove (_RTree _Geom _Eterm)
 ;;   (erlang:nif_error 'nif_not_loaded))

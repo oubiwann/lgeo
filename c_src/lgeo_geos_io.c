@@ -15,6 +15,39 @@
  */
 #include "lgeo_geos.h"
 
+static ErlNifResourceType* GEOSWKTREADER_RESOURCE;
+static ErlNifResourceType* GEOSWKTWRITER_RESOURCE;
+static ErlNifResourceType* GEOSWKBREADER_RESOURCE;
+static ErlNifResourceType* GEOSWKBWRITER_RESOURCE;
+
+static void
+wktreader_destroy(ErlNifEnv *env, void *obj)
+{
+    GEOSWKTReader **wkt_reader = (GEOSWKTReader**)obj;
+    GEOSWKTReader_destroy(*wkt_reader);
+}
+
+static void
+wktwriter_destroy(ErlNifEnv *env, void *obj)
+{
+    GEOSWKTWriter **wkt_writer = (GEOSWKTWriter**)obj;
+    GEOSWKTWriter_destroy(*wkt_writer);
+}
+
+static void
+wkbreader_destroy(ErlNifEnv *env, void *obj)
+{
+    GEOSWKBReader **wkb_reader = (GEOSWKBReader**)obj;
+    GEOSWKBReader_destroy(*wkb_reader);
+}
+
+static void
+wkbwriter_destroy(ErlNifEnv *env, void *obj)
+{
+    GEOSWKBWriter **wkb_writer = (GEOSWKBWriter**)obj;
+    GEOSWKBWriter_destroy(*wkb_writer);
+}
+
 /* From https://github.com/iamaleksey/iconverl/blob/master/c_src/iconverl.c */
 static int
 load(ErlNifEnv *env, void **priv, ERL_NIF_TERM load_info)

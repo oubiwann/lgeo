@@ -12,10 +12,6 @@
 #define DIMENSION 2
 
 static ErlNifResourceType* GEOSGEOM_RESOURCE;
-static ErlNifResourceType* GEOSWKTREADER_RESOURCE;
-static ErlNifResourceType* GEOSWKTWRITER_RESOURCE;
-static ErlNifResourceType* GEOSWKBREADER_RESOURCE;
-static ErlNifResourceType* GEOSWKBWRITER_RESOURCE;
 static ErlNifResourceType* GEOSSTRTREE_RESOURCE;
 
 /* Currently support for 2 dimensions only */
@@ -462,35 +458,7 @@ geom_destroy(ErlNifEnv *env, void *obj)
 }
 
 static void
-wktreader_destroy(ErlNifEnv *env, void *obj)
-{
-    GEOSWKTReader **wkt_reader = (GEOSWKTReader**)obj;
-    GEOSWKTReader_destroy(*wkt_reader);
-}
-
-static void
-wktwriter_destroy(ErlNifEnv *env, void *obj)
-{
-    GEOSWKTWriter **wkt_writer = (GEOSWKTWriter**)obj;
-    GEOSWKTWriter_destroy(*wkt_writer);
-}
-
-static void
-wkbreader_destroy(ErlNifEnv *env, void *obj)
-{
-    GEOSWKBReader **wkb_reader = (GEOSWKBReader**)obj;
-    GEOSWKBReader_destroy(*wkb_reader);
-}
-
-static void
-wkbwriter_destroy(ErlNifEnv *env, void *obj)
-{
-    GEOSWKBWriter **wkb_writer = (GEOSWKBWriter**)obj;
-    GEOSWKBWriter_destroy(*wkb_writer);
-}
-
-static void
-geosstrtree_destroy(ErlNifEnv *env, void *obj)
+strtree_destroy(ErlNifEnv *env, void *obj)
 {
     GeosSTRtree_t **tree = (GeosSTRtree_t**)obj;
     GEOSSTRtree_destroy((**tree).tree);

@@ -22,7 +22,7 @@ load(ErlNifEnv *env, void **priv, ERL_NIF_TERM load_info)
     initGEOS(notice_handler, error_handler);
 
     GEOSSTRTREE_RESOURCE = enif_open_resource_type(
-        env, NULL, "geosstrtree_resource", &geosstrtree_destroy,
+        env, NULL, "geosstrtree_resource", &strtree_destroy,
         ERL_NIF_RT_CREATE | ERL_NIF_RT_TAKEOVER, NULL);
 
     return 0;
@@ -44,11 +44,11 @@ unload(ErlNifEnv* env, void* priv_data)
 /*
 extern GEOSSTRtree GEOS_DLL *GEOSSTRtree_create(size_t nodeCapacity);
 
-GeosSTRtree = lgeo_geos_index:geosstrtree_create().
+GeosSTRtree = lgeo_geos_index:strtree_create().
 <<>>
 */
 static ERL_NIF_TERM
-geosstrtree_create(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+strtree_create(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     ERL_NIF_TERM eterm;
 
@@ -73,14 +73,14 @@ extern void GEOS_DLL GEOSSTRtree_insert(GEOSSTRtree *tree,
                                         const GEOSGeometry *g,
                                         void *item);
 
-GeosSTRtree = lgeo_geos_index:geosstrtree_create(),
+GeosSTRtree = lgeo_geos_index:strtree_create(),
 Element = {element, 1},
 Geom = lgeo_geos_index:to_geom({'LineString', [[4,4], [4.5, 4.5], [10,10]]}),
-lgeo_geos_index:geosstrtree_insert(GeosSTRtree, Geom, Element).
+lgeo_geos_index:strtree_insert(GeosSTRtree, Geom, Element).
 ok
 */
 static ERL_NIF_TERM
-geosstrtree_insert(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+strtree_insert(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     GeosSTRtree_t **tree;
     GEOSGeometry **geom;
@@ -107,19 +107,19 @@ extern void GEOS_DLL GEOSSTRtree_query(GEOSSTRtree *tree,
                                        GEOSQueryCallback callback,
                                        void *userdata);
 
-GeosSTRtree = lgeo_geos_index:geosstrtree_create(),
+GeosSTRtree = lgeo_geos_index:strtree_create(),
 Element1 = {'LineString', [[4.0,4.0], [4.5, 4.5], [10.0,10.0]]},
 Element2 = 17.0,
 Element3 = ["hola"],
 Geom = lgeo_geos_index:to_geom(Element1),
-lgeo_geos_index:geosstrtree_insert(GeosSTRtree, Geom, Element1),
-lgeo_geos_index:geosstrtree_insert(GeosSTRtree, Geom, Element2),
-lgeo_geos_index:geosstrtree_insert(GeosSTRtree, Geom, Element3),
-lgeo_geos_index:geosstrtree_query(GeosSTRtree, Geom).
+lgeo_geos_index:strtree_insert(GeosSTRtree, Geom, Element1),
+lgeo_geos_index:strtree_insert(GeosSTRtree, Geom, Element2),
+lgeo_geos_index:strtree_insert(GeosSTRtree, Geom, Element3),
+lgeo_geos_index:strtree_query(GeosSTRtree, Geom).
 [Element1, Element2, Element3]
 */
 static ERL_NIF_TERM
-geosstrtree_query(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+strtree_query(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     GeosSTRtree_t **tree;
     GEOSGeometry **geom;
@@ -155,7 +155,7 @@ geosstrtree_query(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
 */
 static ERL_NIF_TERM
-geosstrtree_iterate(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+strtree_iterate(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     GeosSTRtree_t **tree;
     ERL_NIF_TERM eterm;
@@ -187,16 +187,16 @@ extern char GEOS_DLL GEOSSTRtree_remove(GEOSSTRtree *tree,
                                         const GEOSGeometry *g,
                                         void *item);
 
-//GeosSTRtree = lgeo_geos_index:geosstrtree_create(),
+//GeosSTRtree = lgeo_geos_index:strtree_create(),
 //Ls1 = {'LineString', [[3.0,3.0],[6.0,6.0]]},
 //Geom1 = lgeo_geos_index:to_geom(Ls1),
-//lgeo_geos_index:geosstrtree_insert(GeosSTRtree, Geom1, Ls1),
-//lgeo_geos_index:geosstrtree_remove(GeosSTRtree, Geom1, Ls1),
-//Geoms = lgeo_geos_index:geosstrtree_query(GeosSTRtree, Geom1).
+//lgeo_geos_index:strtree_insert(GeosSTRtree, Geom1, Ls1),
+//lgeo_geos_index:strtree_remove(GeosSTRtree, Geom1, Ls1),
+//Geoms = lgeo_geos_index:strtree_query(GeosSTRtree, Geom1).
 //[]
 
 static ERL_NIF_TERM
-geosstrtree_remove(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+strtree_remove(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     GeosSTRtree_t **tree;
     GEOSGeometry **geom;
@@ -271,11 +271,11 @@ ERL_NIF_TERM from_geom(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]) {
 
 static ErlNifFunc nif_funcs[] =
 {
-    {"geosstrtree_create", 0, geosstrtree_create},
-    {"geosstrtree_insert", 3, geosstrtree_insert},
-    {"geosstrtree_iterate", 1, geosstrtree_iterate},
-    {"geosstrtree_query", 2, geosstrtree_query}
-    //{"geosstrtree_remove", 3, geosstrtree_remove}
+    {"strtree_create", 0, strtree_create},
+    {"strtree_insert", 3, strtree_insert},
+    {"strtree_iterate", 1, strtree_iterate},
+    {"strtree_query", 2, strtree_query}
+    //{"strtree_remove", 3, strtree_remove}
 };
 
 ERL_NIF_INIT(lgeo_geos_index, nif_funcs, &load, NULL, NULL, unload);
