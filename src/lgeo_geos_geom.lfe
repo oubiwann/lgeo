@@ -25,30 +25,26 @@
 
 ;;; NIF functions
 
-;; XXX setup alias in separate module
 (defun disjoint (_Geom1 _Geom2)
   (erlang:nif_error 'nif_not_loaded))
 
-;; XXX setup alias in separate module
 (defun get_centroid (_Geom1)
   (erlang:nif_error 'nif_not_loaded))
 
-;; XXX setup alias in separate module
 (defun intersection (_Geom1 _Geom2)
   (erlang:nif_error 'nif_not_loaded))
 
-;; XXX setup alias in separate module
 (defun intersects (_Geom1 _Geom2)
   (erlang:nif_error 'nif_not_loaded))
 
-;; XXX setup alias in separate module
 (defun is_valid (_Geom1)
   (erlang:nif_error 'nif_not_loaded))
 
-;; XXX setup alias in separate module
 (defun topology_preserve_simplify (_Geom1 _Tolerance)
   (erlang:nif_error 'nif_not_loaded))
 
+;; XXX the following need to be converted from Erlang to LFE
+;;
 ; ;; @doc Convert a GeoCouch geometry to a GEOS geometry, validate
 ; ;; the structure of the geometry.
 ; -spec to_geom_validate(Geom::{atom(), list()}) -> true|false.
@@ -148,10 +144,8 @@
 ;         false
 ;     end.
 
-;; @doc Convert a GeoCouch geometry to a GEOS geometry
 (defun to_geom (_Geom)
   (erlang:nif_error 'nif_not_loaded))
 
-;; @doc Convert a GEOS geometry to a GeoCouch geometry
 (defun from_geom (_Geom)
   (erlang:nif_error 'nif_not_loaded))

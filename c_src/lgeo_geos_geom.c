@@ -298,12 +298,12 @@ ERL_NIF_TERM from_geom(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[]) {
 static ErlNifFunc nif_funcs[] =
 {
     {"disjoint", 2, disjoint},
-    {"from_geom", 1, from_geom},
     {"get_centroid", 1, get_centroid},
     {"intersection", 2, intersection},
     {"intersects", 2, intersects},
     {"is_valid", 1, is_valid},
     {"to_geom", 1, to_geom},
+    {"from_geom", 1, from_geom},
     {"topology_preserve_simplify", 2, topology_preserve_simplify}
 };
 
