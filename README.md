@@ -43,10 +43,10 @@ There are four main "namespaces" for the lgeo project:
 
 * ``lgeo``/``lgeo.*`` - top-level modules and function that relate specifically to
   the lgeo project
-* ``gdal``/``gdal.*`` - modules and functions from GDAL (specifically, ``gdal.h``)
-* ``ogr``/``ogr.*`` - modules and functions from OGR (specifically, ``ogr_api.h``
+* ``gdal``/``gdal.*`` - modules for functions from GDAL (specifically, ``gdal.h``)
+* ``ogr``/``ogr.*`` - modules for functions from OGR (specifically, ``ogr_api.h``
   and ``ogr_srs_api.h``)
-* ``geos``/``geos.*`` - modules and functions from GEOS (specifically, ``geos_c.h``)
+* ``geos``/``geos.*`` - modules for functions from GEOS (specifically, ``geos_c.h``)
 
 Note that it may become necessary in the future to include a fourth: a namespace for
 the PROJ4 library.
