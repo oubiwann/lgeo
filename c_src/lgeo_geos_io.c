@@ -13,77 +13,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
-
-#include <geos_c.h>
-
-#include "erl_nif.h"
-
-/* From comp.lang.c FAQ Question 17.3 */
-#define Streq(s1, s2) (strcmp((s1), (s2)) == 0)
-
-#define DIMENSION 2
-
-static ErlNifResourceType* GEOSGEOM_RESOURCE;
-static ErlNifResourceType* GEOSWKTREADER_RESOURCE;
-static ErlNifResourceType* GEOSWKTWRITER_RESOURCE;
-static ErlNifResourceType* GEOSWKBREADER_RESOURCE;
-static ErlNifResourceType* GEOSWKBWRITER_RESOURCE;
-
-/* From http://trac.gispython.org/lab/browser/PCL/trunk/PCL-Core/cartography/
-    geometry/_geommodule.c */
-static void
-notice_handler(const char *fmt, ...) {
-    va_list ap;
-    fprintf(stderr, "NOTICE: ");
-    va_start (ap, fmt);
-    vfprintf(stderr, fmt, ap);
-    va_end(ap);
-    fprintf(stderr, "\n" );
-}
-
-/* From http://trac.gispython.org/lab/browser/PCL/trunk/PCL-Core/cartography/
-    geometry/_geommodule.c */
-static void
-error_handler(const char *fmt, ...)
-{
-    va_list ap;
-    va_start (ap, fmt);
-    va_end(ap);
-    vfprintf(stderr, fmt, ap);
-    fprintf(stderr, "\n" );
-}
-
-static void
-wktreader_destroy(ErlNifEnv *env, void *obj)
-{
-    GEOSWKTReader **wkt_reader = (GEOSWKTReader**)obj;
-    GEOSWKTReader_destroy(*wkt_reader);
-}
-
-static void
-wktwriter_destroy(ErlNifEnv *env, void *obj)
-{
-    GEOSWKTWriter **wkt_writer = (GEOSWKTWriter**)obj;
-    GEOSWKTWriter_destroy(*wkt_writer);
-}
-
-static void
-wkbreader_destroy(ErlNifEnv *env, void *obj)
-{
-    GEOSWKBReader **wkb_reader = (GEOSWKBReader**)obj;
-    GEOSWKBReader_destroy(*wkb_reader);
-}
-
-static void
-wkbwriter_destroy(ErlNifEnv *env, void *obj)
-{
-    GEOSWKBWriter **wkb_writer = (GEOSWKBWriter**)obj;
-    GEOSWKBWriter_destroy(*wkb_writer);
-}
-
+#include "lgeo_geos.h"
 
 /* From https://github.com/iamaleksey/iconverl/blob/master/c_src/iconverl.c */
 static int

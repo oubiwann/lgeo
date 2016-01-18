@@ -13,78 +13,7 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
-
-#include <geos_c.h>
-
-#include "erl_nif.h"
-
-/* From comp.lang.c FAQ Question 17.3 */
-#define Streq(s1, s2) (strcmp((s1), (s2)) == 0)
-
-#define DIMENSION 2
-
-static ErlNifResourceType* GEOSGEOM_RESOURCE;
-static ErlNifResourceType* GEOSSTRTREE_RESOURCE;
-
-typedef struct {
-    ErlNifEnv *env;
-    GEOSSTRtree *tree;
-} GeosSTRtree_t;
-
-typedef struct {
-    int count;
-    int size;
-    ERL_NIF_TERM *elements;
-} GeosSTRtree_acc_t;
-
-void
-geosstrtree_cb(void *item, void *acc) {
-    GeosSTRtree_acc_t *acc_ptr  = (GeosSTRtree_acc_t *) acc;
-    ++(acc_ptr->count);
-    if (acc_ptr->count == acc_ptr->size) {
-        acc_ptr->size *=2;
-        acc_ptr->elements = enif_realloc(acc_ptr->elements, acc_ptr->size);
-    }
-    acc_ptr->elements[acc_ptr->count-1] = (ERL_NIF_TERM) item;
-}
-
-
-/* From http://trac.gispython.org/lab/browser/PCL/trunk/PCL-Core/cartography/
-    geometry/_geommodule.c */
-static void
-notice_handler(const char *fmt, ...) {
-    va_list ap;
-    fprintf(stderr, "NOTICE: ");
-    va_start (ap, fmt);
-    vfprintf(stderr, fmt, ap);
-    va_end(ap);
-    fprintf(stderr, "\n" );
-}
-
-/* From http://trac.gispython.org/lab/browser/PCL/trunk/PCL-Core/cartography/
-    geometry/_geommodule.c */
-static void
-error_handler(const char *fmt, ...)
-{
-    va_list ap;
-    va_start (ap, fmt);
-    va_end(ap);
-    vfprintf(stderr, fmt, ap);
-    fprintf(stderr, "\n" );
-}
-
-static void
-geosstrtree_destroy(ErlNifEnv *env, void *obj)
-{
-    GeosSTRtree_t **tree = (GeosSTRtree_t**)obj;
-    GEOSSTRtree_destroy((**tree).tree);
-    enif_free_env((**tree).env);
-    enif_free(*tree);
-}
-
+#include "lgeo_geos.h"
 
 /* From https://github.com/iamaleksey/iconverl/blob/master/c_src/iconverl.c */
 static int
