@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-// http://gdal.org/1.11/gdal_8h.html
+// http://gdal.org/1.11/ogr/classOGRSpatialReference.html
 // http://gdal.org/1.11/ogr/osr_tutorial.html
 
 #include <stdio.h>
