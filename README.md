@@ -24,7 +24,7 @@
 * [License](#license-)
 
 
-**NOTICE**: Work in progress; partial OGR support; no GDAL support
+**NOTICE**: Work in progress; partial OGR, OSR, and GEOS support; no GDAL support
 
 
 ## Introduction [&#x219F;](#table-of-contents)
