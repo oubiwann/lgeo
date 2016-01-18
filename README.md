@@ -51,6 +51,8 @@ There are four main "namespaces" for the lgeo project:
 Note that it may become necessary in the future to include a fourth: a namespace for
 the PROJ4 library.
 
+The LFE NIF wrappers of the form ``lgeo_*`` are not intended to be used directly (though one certianly may do so). It is preferable to use the dotted modules.
+
 
 ### Erlang Sources [&#x219F;](#table-of-contents)
 
