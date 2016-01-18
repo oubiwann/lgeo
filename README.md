@@ -15,6 +15,7 @@
   * [Project Structure](#project-structure-)
   * [Erlang Sources](#erlang-sources-)
   * [C Sources](#c-sources-)
+* [Dependencies](#dependencies-)
 * [Installation](#installation-)
   * [Linux/BSD](#linuxbsd-)
   * [Windows](#on-windows-)
@@ -77,12 +78,20 @@ The C source code from the GDAL and GEOS bits used so far in lgeo are documented
   * [io](http://geos.osgeo.org/doxygen/namespacegeos_1_1io.html)
 
 
+## Dependencies [&#x219F;](#table-of-contents)
+
+* GDAL
+* GEOS
+* Erlang
+* ``rebar3``
+* GNU Make
+
+You will need to have the GDAL and GEOS libraries installed. Linux GIS packages usually provide GDAL 1.11.x, as such that is the version supported (tested) by this library. Similarly for GEOS 3.4.2. The LFE in this project was written against Erlang 18.1, though every effort was made to ensure backwards-compatibility through version 15 of Erlang. If you find otherwise, that is a bug and I'd appreciate a issue getting created for it :-)
+
+
 ## Installation [&#x219F;](#table-of-contents)
 
-
 ### Linux/BSD [&#x219F;](#table-of-contents)
-
-You will need to have the GDAL and GEOS libraries installed. Linux GIS packages usually provide GDAL 1.11.x, as such that is the version supported (tested) by this library. Similarly for GEOS 3.4.2.
 
 Build it with:
 
