@@ -15,6 +15,7 @@
   * [Project Structure](#project-structure-)
   * [Erlang Sources](#erlang-sources-)
   * [C Sources](#c-sources-)
+* [Dependencies](#dependencies-)
 * [Installation](#installation-)
   * [Linux/BSD](#linuxbsd-)
   * [Windows](#on-windows-)
@@ -24,14 +25,14 @@
 * [License](#license-)
 
 
-**NOTICE**: Work in progress; partial OGR support; no GDAL support
+**NOTICE**: Work in progress; partial OGR, OSR, and GEOS support; no GDAL support
 
 
 ## Introduction [&#x219F;](#table-of-contents)
 
 This project is an experiment for solving GIS problems on the Erlang VM, particularly, doing so in LFE.
 
-It is based on the work originally done by @caroman in his [erlogr](https://github.com/caroman/erlogr) project. Unfortunately, that code base was written for Erlang R13 and hasn't been updated for 18.x (neither, it seems, does it work on 15.x). The erloger project focused entirely upon OGR, the vector part of GDAL. I'm still trying to sort out the Erlang C ports for OGR, but I have a greater interest in the raster side of things (e.g., satellite data), so I'm going to be putting most of my efforts into getting a few bits of GDAL-proper up and runnnig.
+It is based on the work originally done by [@caroman](https://github.com/caroman) in his [erlogr](https://github.com/caroman/erlogr) project. Unfortunately, that code base was written for Erlang R13 and hasn't been updated for 18.x (neither, it seems, does it work on 15.x). The erloger project focused entirely upon OGR, the vector part of GDAL. I'm still trying to sort out the Erlang C ports for OGR, but I have a greater interest in the raster side of things (e.g., satellite data), so I'm going to be putting most of my efforts into getting a few bits of GDAL-proper up and runnnig. [@caroman](https://github.com/caroman) also worked on two other Erlang GIS projects -- both of which are being brought into lgeo (more details below in the [Erlang Sources](#erlang-sources-) section).
 
 The only functions from the erlogr project that were written in Erlang were NIF wrappers. In lgeo, these have been rewritten in LFE (essentially one line of code, each). Additionally, though, lgeo is providing NIF wrappers organized along the same lines as the [Python bindings](http://gdal.org/python/), and to a lesser extent, the [C++ library](http://gdal.org/1.11/annotated.html). LFE/Erlang doesn't have namespaces, though, so this is "faked" though a dotted file/module naming convention, such as ``gdal.dataset`` and functions like ``gdal.dataset:open``.
 
@@ -49,6 +50,8 @@ There are four main "namespaces" for the lgeo project:
 
 Note that it may become necessary in the future to include a fourth: a namespace for
 the PROJ4 library.
+
+The LFE NIF wrappers of the form ``lgeo_*`` are not intended to be used directly (though one certianly may do so). It is preferable to use the dotted modules.
 
 
 ### Erlang Sources [&#x219F;](#table-of-contents)
@@ -77,8 +80,18 @@ The C source code from the GDAL and GEOS bits used so far in lgeo are documented
   * [io](http://geos.osgeo.org/doxygen/namespacegeos_1_1io.html)
 
 
-## Installation [&#x219F;](#table-of-contents)
+## Dependencies [&#x219F;](#table-of-contents)
 
+* GDAL
+* GEOS
+* Erlang
+* ``rebar3``
+* GNU Make
+
+You will need to have the GDAL and GEOS libraries installed. Linux GIS packages usually provide GDAL 1.11.x, as such that is the version supported (tested) by this library. Similarly for GEOS 3.4.2. The LFE in this project was written against Erlang 18.1, though every effort was made to ensure backwards-compatibility through version 15 of Erlang. If you find otherwise, that is a bug and I'd appreciate a issue getting created for it :-)
+
+
+## Installation [&#x219F;](#table-of-contents)
 
 ### Linux/BSD [&#x219F;](#table-of-contents)
 
@@ -108,6 +121,10 @@ Now set it up so that GDAL and Erlang can be found:
 SET INCLUDE=%INCLUDE%;C:\cygwin\opt\gdal\include;C:\cygwin\opt\gdal\include\gdal
 SET LIB=%LIB%;C:\cygwin\opt\gdal\lib
 SET PATH=%PATH%;C:\cygwin\opt\gdal\bin;C:\erl5.9.1\bin
+
+SET INCLUDE=%INCLUDE%;C:\cygwin\opt\geos\include
+SET LIB=%LIB%;C:\cygwin\opt\geos\lib
+SET PATH=%PATH%;C:\cygwin\opt\geos\bin
 ```
 
 And finally compile the whole thing:
