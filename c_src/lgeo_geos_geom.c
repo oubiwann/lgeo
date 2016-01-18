@@ -36,7 +36,7 @@ static ErlNifResourceType* GEOSSTRTREE_RESOURCE;
 /* Currently support for 2 dimensions only */
 int
 set_GEOSCoordSeq_from_eterm_list(GEOSCoordSequence *seq, int pos,
-        ErlNifEnv *env, const ERL_NIF_TERM *coords) 
+        ErlNifEnv *env, const ERL_NIF_TERM *coords)
 {
     double dbl_coord;
     int int_coord;
@@ -562,9 +562,9 @@ unload(ErlNifEnv* env, void* priv_data)
  ***********************************************************************/
 
 /*
-Geom1 = erlgeom:to_geom({'Point',[5,5]}),
-Geom2 = erlgeom:to_geom({'LineString', [[1,1],[14,14]]}),
-erlgeom:disjoint(Geom1, Geom2).
+Geom1 = lgeo_geos_geom:to_geom({'Point',[5,5]}),
+Geom2 = lgeo_geos_geom:to_geom({'LineString', [[1,1],[14,14]]}),
+lgeo_geos_geom:disjoint(Geom1, Geom2).
 false
 */
 static ERL_NIF_TERM
@@ -584,7 +584,7 @@ disjoint(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
     if(!enif_get_resource(env, argv[1], GEOSGEOM_RESOURCE, (void**)&geom2)) {
         return enif_make_badarg(env);
     }
-    
+
     int result;
     if ((result = GEOSDisjoint(*geom1, *geom2)) == 1) {
         return enif_make_atom(env, "true");
@@ -596,9 +596,9 @@ disjoint(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 }
 
 /*
-Geom1 = erlgeom:to_geom({'LineString', [[3,3],[10,10]]}),
-Geom2 = erlgeom:to_geom({'LineString', [[1,1],[7,7]]}),
-erlgeom:intersects(Geom1, Geom2).
+Geom1 = lgeo_geos_geom:to_geom({'LineString', [[3,3],[10,10]]}),
+Geom2 = lgeo_geos_geom:to_geom({'LineString', [[1,1],[7,7]]}),
+lgeo_geos_geom:intersects(Geom1, Geom2).
 true
 */
 static ERL_NIF_TERM
@@ -636,10 +636,10 @@ intersects(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
  ***********************************************************************/
 
 /*
-Geom1 = erlgeom:to_geom({'LineString', [[3,3],[10,10]]}),
-Geom2 = erlgeom:to_geom({'LineString', [[1,1],[7,7]]}),
-Geom3 = erlgeom:intersection(Geom1, Geom2),
-erlgeom:from_geom(Geom3).
+Geom1 = lgeo_geos_geom:to_geom({'LineString', [[3,3],[10,10]]}),
+Geom2 = lgeo_geos_geom:to_geom({'LineString', [[1,1],[7,7]]}),
+Geom3 = lgeo_geos_geom:intersection(Geom1, Geom2),
+lgeo_geos_geom:from_geom(Geom3).
 {'LineString', [[3,3],[7,7]]}
 */
 static ERL_NIF_TERM
@@ -677,9 +677,9 @@ intersection(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 }
 
 /*
-Geom1 = erlgeom:to_geom({'LineString', [[4,4],[10,10]]}),
-Geom2 = erlgeom:get_centroid_geom(Geom1),
-erlgeom:from_geom(Geom2).
+Geom1 = lgeo_geos_geom:to_geom({'LineString', [[4,4],[10,10]]}),
+Geom2 = lgeo_geos_geom:get_centroid_geom(Geom1),
+lgeo_geos_geom:from_geom(Geom2).
 {'Point',[7.0,7.0]}
 */
 static ERL_NIF_TERM
@@ -712,8 +712,8 @@ get_centroid(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 }
 
 /*
-Geom1 = erlgeom:to_geom({'LineString', [[4,4], [4.5, 4.5], [10,10]]}),
-erlgeom:topology_preserve_simplify(Geom1, 1).
+Geom1 = lgeo_geos_geom:to_geom({'LineString', [[4,4], [4.5, 4.5], [10,10]]}),
+lgeo_geos_geom:topology_preserve_simplify(Geom1, 1).
 {'LineString',[[4.0,4.0],[10.0,10.0]]}
 */
 static ERL_NIF_TERM
@@ -752,11 +752,11 @@ topology_preserve_simplify(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
  *
  ***********************************************************************/
 /*
-Geom1 = erlgeom:to_geom({'LineString', [[4,4], [4.5, 4.5], [10,10]]}),
-erlgeom:is_valid(Geom1).
+Geom1 = lgeo_geos_geom:to_geom({'LineString', [[4,4], [4.5, 4.5], [10,10]]}),
+lgeo_geos_geom:is_valid(Geom1).
 true
-Geom2 = erlgeom:wktreader_read(WktReader,"POLYGON((0 0, 1 1, 1 2, 1 1, 0 0))"),
-erlgeom:is_valid(Geom2).
+Geom2 = lgeo_geos_geom:wktreader_read(WktReader,"POLYGON((0 0, 1 1, 1 2, 1 1, 0 0))"),
+lgeo_geos_geom:is_valid(Geom2).
 false
 */
 static ERL_NIF_TERM
@@ -791,7 +791,7 @@ is_valid(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
  ***********************************************************************/
 
 /*
-WktReader = erlgeom:wktreader_create().
+WktReader = lgeo_geos_geom:wktreader_create().
 <<>>
 */
 static ERL_NIF_TERM
@@ -808,9 +808,9 @@ wktreader_create(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 }
 
 /*
-WktReader = erlgeom:wktreader_create(),
-Geom = erlgeom:wktreader_read(WktReader, "POINT(10 10)"),
-erlgeom:from_geom(Geom).
+WktReader = lgeo_geos_geom:wktreader_create(),
+Geom = lgeo_geos_geom:wktreader_read(WktReader, "POINT(10 10)"),
+lgeo_geos_geom:from_geom(Geom).
 {'Point',[10.0,10.0]}
 */
 static ERL_NIF_TERM
@@ -849,7 +849,7 @@ wktreader_read(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 }
 
 /*
-WkbReader = erlgeom:wkbreader_create().
+WkbReader = lgeo_geos_geom:wkbreader_create().
 <<>>
 */
 static ERL_NIF_TERM
@@ -861,20 +861,20 @@ wkbreader_create(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
         enif_alloc_resource(GEOSWKBREADER_RESOURCE, sizeof(GEOSWKBReader*));
     *wkb_reader = GEOSWKBReader_create();
 
-    
+
     eterm = enif_make_resource(env, wkb_reader);
     enif_release_resource(wkb_reader);
     return eterm;
 }
 
 /*
-WktReader = erlgeom:wktreader_create(),
-Geom = erlgeom:wktreader_read(WktReader, "POINT(10.0 10.0)"),
-WkbWriter = erlgeom:wkbwriter_create(),
-Bin = erlgeom:wkbwriter_write(WkbWriter, Geom),
-WkbReader = erlgeom:wkbreader_create(),
-Geom2 = erlgeom:wkbreader_read(WkbReader, Bin),
-erlgeom:from_geom(Geom2).
+WktReader = lgeo_geos_geom:wktreader_create(),
+Geom = lgeo_geos_geom:wktreader_read(WktReader, "POINT(10.0 10.0)"),
+WkbWriter = lgeo_geos_geom:wkbwriter_create(),
+Bin = lgeo_geos_geom:wkbwriter_write(WkbWriter, Geom),
+WkbReader = lgeo_geos_geom:wkbreader_create(),
+Geom2 = lgeo_geos_geom:wkbreader_read(WkbReader, Bin),
+lgeo_geos_geom:from_geom(Geom2).
 {'Point',[10.0,10.0]}
 */
 static ERL_NIF_TERM
@@ -894,7 +894,7 @@ wkbreader_read(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
     }
 
     if (!enif_inspect_binary(env, argv[1], &bin)){
-	    return enif_make_badarg(env);
+            return enif_make_badarg(env);
     }
 
     GEOSGeometry **geom = \
@@ -908,10 +908,10 @@ wkbreader_read(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
 
 /*
-WkbReader = erlgeom:wkbreader_create(),
-Geom = erlgeom:wkbreader_readhex(WkbReader,
+WkbReader = lgeo_geos_geom:wkbreader_create(),
+Geom = lgeo_geos_geom:wkbreader_readhex(WkbReader,
     "010100000000000000000024400000000000002440"),
-erlgeom:from_geom(Geom).
+lgeo_geos_geom:from_geom(Geom).
 {'Point',[10.0,10.0]}
 */
 static ERL_NIF_TERM
@@ -935,7 +935,7 @@ wkbreader_readhex(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
     }
     char *wkb_hex = enif_alloc(sizeof(char)*(len+1));
 
-    // TODO: Specific message in cases < 0, == 0 
+    // TODO: Specific message in cases < 0, == 0
     if(enif_get_string(env, argv[1], wkb_hex, len+1, ERL_NIF_LATIN1) <= 0) {
         return enif_make_badarg(env);
     }
@@ -952,7 +952,7 @@ wkbreader_readhex(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 }
 
 /*
-WktWriter = erlgeom:wktwriter_create().
+WktWriter = lgeo_geos_geom:wktwriter_create().
 <<>>
 */
 static ERL_NIF_TERM
@@ -969,10 +969,10 @@ wktwriter_create(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 }
 
 /*
-WktReader = erlgeom:wktreader_create(),
-Geom = erlgeom:wktreader_read(WktReader, "POINT(10 10)"),
-WktWriter = erlgeom:wktwriter_create(),
-erlgeom:wktwriter_write(WktWriter, Geom).
+WktReader = lgeo_geos_geom:wktreader_create(),
+Geom = lgeo_geos_geom:wktreader_read(WktReader, "POINT(10 10)"),
+WktWriter = lgeo_geos_geom:wktwriter_create(),
+lgeo_geos_geom:wktwriter_write(WktWriter, Geom).
 "Point(10.0000000000000000 10.0000000000000000)"
 */
 static ERL_NIF_TERM
@@ -1003,7 +1003,7 @@ wktwriter_write(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
 
 /*
-WkbWriter = erlgeom:wkbwriter_create().
+WkbWriter = lgeo_geos_geom:wkbwriter_create().
 <<>>
 */
 static ERL_NIF_TERM
@@ -1020,10 +1020,10 @@ wkbwriter_create(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 }
 
 /*
-WktReader = erlgeom:wktreader_create(),
-Geom = erlgeom:wktreader_read(WktReader, "POINT(10.0 10.0)"),
-WkbWriter = erlgeom:wkbwriter_create(),
-erlgeom:wkbwriter_write(WkbWriter, Geom).
+WktReader = lgeo_geos_geom:wktreader_create(),
+Geom = lgeo_geos_geom:wktreader_read(WktReader, "POINT(10.0 10.0)"),
+WkbWriter = lgeo_geos_geom:wkbwriter_create(),
+lgeo_geos_geom:wkbwriter_write(WkbWriter, Geom).
 <<1,1,0,0,0,0,0,0,0,0,0,36,64,0,0,0,0,0,0,36,64>>
 */
 static ERL_NIF_TERM
@@ -1049,7 +1049,7 @@ wkbwriter_write(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
     size_t size;
     unsigned char *wkb = GEOSWKBWriter_write(*wkb_writer, *geom, &size);
     wkb[size] = '\0'; /* ensure it is null terminated */
- 
+
     ErlNifBinary bin = {.size = size, .data = wkb};
     eterm = enif_make_binary(env, &bin);
     enif_release_binary(&bin);
@@ -1059,10 +1059,10 @@ wkbwriter_write(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
 
 /*
-WktReader = erlgeom:wktreader_create(),
-Geom = erlgeom:wktreader_read(WktReader, "POINT(10.0 10.0)"),
-WkbWriter = erlgeom:wkbwriter_create(),
-erlgeom:wkbwriter_writehex(WkbWriter, Geom).
+WktReader = lgeo_geos_geom:wktreader_create(),
+Geom = lgeo_geos_geom:wktreader_read(WktReader, "POINT(10.0 10.0)"),
+WkbWriter = lgeo_geos_geom:wkbwriter_create(),
+lgeo_geos_geom:wkbwriter_writehex(WkbWriter, Geom).
 "010100000000000000000024400000000000002440"
 */
 static ERL_NIF_TERM
@@ -1102,7 +1102,7 @@ wkbwriter_writehex(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 /*
 extern GEOSSTRtree GEOS_DLL *GEOSSTRtree_create(size_t nodeCapacity);
 
-GeosSTRtree = erlgeom:geosstrtree_create().
+GeosSTRtree = lgeo_geos_geom:geosstrtree_create().
 <<>>
 */
 static ERL_NIF_TERM
@@ -1131,10 +1131,10 @@ extern void GEOS_DLL GEOSSTRtree_insert(GEOSSTRtree *tree,
                                         const GEOSGeometry *g,
                                         void *item);
 
-GeosSTRtree = erlgeom:geosstrtree_create(),
+GeosSTRtree = lgeo_geos_geom:geosstrtree_create(),
 Element = {element, 1},
-Geom = erlgeom:to_geom({'LineString', [[4,4], [4.5, 4.5], [10,10]]}),
-erlgeom:geosstrtree_insert(GeosSTRtree, Geom, Element).
+Geom = lgeo_geos_geom:to_geom({'LineString', [[4,4], [4.5, 4.5], [10,10]]}),
+lgeo_geos_geom:geosstrtree_insert(GeosSTRtree, Geom, Element).
 ok
 */
 static ERL_NIF_TERM
@@ -1165,15 +1165,15 @@ extern void GEOS_DLL GEOSSTRtree_query(GEOSSTRtree *tree,
                                        GEOSQueryCallback callback,
                                        void *userdata);
 
-GeosSTRtree = erlgeom:geosstrtree_create(),
+GeosSTRtree = lgeo_geos_geom:geosstrtree_create(),
 Element1 = {'LineString', [[4.0,4.0], [4.5, 4.5], [10.0,10.0]]},
 Element2 = 17.0,
 Element3 = ["hola"],
-Geom = erlgeom:to_geom(Element1),
-erlgeom:geosstrtree_insert(GeosSTRtree, Geom, Element1),
-erlgeom:geosstrtree_insert(GeosSTRtree, Geom, Element2),
-erlgeom:geosstrtree_insert(GeosSTRtree, Geom, Element3),
-erlgeom:geosstrtree_query(GeosSTRtree, Geom).
+Geom = lgeo_geos_geom:to_geom(Element1),
+lgeo_geos_geom:geosstrtree_insert(GeosSTRtree, Geom, Element1),
+lgeo_geos_geom:geosstrtree_insert(GeosSTRtree, Geom, Element2),
+lgeo_geos_geom:geosstrtree_insert(GeosSTRtree, Geom, Element3),
+lgeo_geos_geom:geosstrtree_query(GeosSTRtree, Geom).
 [Element1, Element2, Element3]
 */
 static ERL_NIF_TERM
@@ -1225,7 +1225,7 @@ geosstrtree_iterate(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
     if(!enif_get_resource(env, argv[0], GEOSSTRTREE_RESOURCE, (void**)&tree)) {
         return enif_make_badarg(env);
     }
-    
+
     int size = 128;
 
     ERL_NIF_TERM *arr = (ERL_NIF_TERM *) enif_alloc(sizeof(ERL_NIF_TERM)*size);
@@ -1245,12 +1245,12 @@ extern char GEOS_DLL GEOSSTRtree_remove(GEOSSTRtree *tree,
                                         const GEOSGeometry *g,
                                         void *item);
 
-//GeosSTRtree = erlgeom:geosstrtree_create(),
+//GeosSTRtree = lgeo_geos_geom:geosstrtree_create(),
 //Ls1 = {'LineString', [[3.0,3.0],[6.0,6.0]]},
-//Geom1 = erlgeom:to_geom(Ls1),
-//erlgeom:geosstrtree_insert(GeosSTRtree, Geom1, Ls1),
-//erlgeom:geosstrtree_remove(GeosSTRtree, Geom1, Ls1),
-//Geoms = erlgeom:geosstrtree_query(GeosSTRtree, Geom1).
+//Geom1 = lgeo_geos_geom:to_geom(Ls1),
+//lgeo_geos_geom:geosstrtree_insert(GeosSTRtree, Geom1, Ls1),
+//lgeo_geos_geom:geosstrtree_remove(GeosSTRtree, Geom1, Ls1),
+//Geoms = lgeo_geos_geom:geosstrtree_query(GeosSTRtree, Geom1).
 //[]
 
 static ERL_NIF_TERM
@@ -1273,9 +1273,9 @@ geosstrtree_remove(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
     char remove = \
         GEOSSTRtree_remove((**tree).tree, GEOSEnvelope(*geom), (void*)argv[2]);
-	//printf("Rtree remove: %d.\n", remove); 
+        //printf("Rtree remove: %d.\n", remove);
 
-    if (remove == 0) { 
+    if (remove == 0) {
         return enif_make_tuple2(env,
             enif_make_atom(env, "ok"),
             enif_make_atom(env, "false"));
@@ -1354,4 +1354,4 @@ static ErlNifFunc nif_funcs[] =
     {"wktwriter_write", 2, wktwriter_write}
 };
 
-ERL_NIF_INIT(erlgeom, nif_funcs, &load, NULL, NULL, unload);
+ERL_NIF_INIT(lgeo_geos_geom, nif_funcs, &load, NULL, NULL, unload);
