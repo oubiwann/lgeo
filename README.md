@@ -187,6 +187,7 @@ Old Erlang example:
 ## License [&#x219F;](#table-of-contents)
 
 ```
+Copyright © 2011 Couchbase, Inc.
 Copyright © 2012 Carlos Roman
 Copyright © 2016 Duncan McGreggor
 
