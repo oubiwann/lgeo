@@ -1,5 +1,6 @@
 # lgeo
 
+
 [![][lgeo-logo]][lgeo-logo-large]
 
 [lgeo-logo]: resources/images/lgeo-250x.png
@@ -7,9 +8,13 @@
 
 *LFE/Erlang GIS Bindings for GDAL/OGR*
 
+
 #### Table of Contents
 
 * [Introduction](#introduction-)
+  * [Project Structure](#project-structure-)
+  * [Erlang Sources](#erlang-sources-)
+  * [C Sources](#c-sources-)
 * [Installation](#installation-)
   * [Linux/BSD](#linuxbsd-)
   * [Windows](#on-windows-)
@@ -30,17 +35,46 @@ It is based on the work originally done by @caroman in his [erlogr](https://gith
 
 The only functions from the erlogr project that were written in Erlang were NIF wrappers. In lgeo, these have been rewritten in LFE (essentially one line of code, each). Additionally, though, lgeo is providing NIF wrappers organized along the same lines as the [Python bindings](http://gdal.org/python/), and to a lesser extent, the [C++ library](http://gdal.org/1.11/annotated.html). LFE/Erlang doesn't have namespaces, though, so this is "faked" though a dotted file/module naming convention, such as ``gdal.dataset`` and functions like ``gdal.dataset:open``.
 
-There are three main "namespaces" for the lgeo project:
+
+### Project Structure [&#x219F;](#table-of-contents)
+
+There are four main "namespaces" for the lgeo project:
 
 * ``lgeo``/``lgeo.*`` - top-level modules and function that relate specifically to
   the lgeo project
-* ``gdal``/``gdal.*`` - modules and function from GDAL (specifically, ``gdal.h``)
-  the lgeo project
-* ``ogr``/``ogr.*`` - modules and function from GDAL (specifically, ``ogr_api.h``)
-  the lgeo project
+* ``gdal``/``gdal.*`` - modules and functions from GDAL (specifically, ``gdal.h``)
+* ``ogr``/``ogr.*`` - modules and functions from OGR (specifically, ``ogr_api.h``
+  and ``ogr_srs_api.h``)
+* ``geos``/``geos.*`` - modules and functions from GEOS (specifically, ``geos_c.h``)
 
 Note that it may become necessary in the future to include a fourth: a namespace for
 the PROJ4 library.
+
+
+### Erlang Sources [&#x219F;](#table-of-contents)
+
+The Erlang projects whose code was converted to LFE, and in that form provided the basis
+for the lgeo project, as as follows:
+
+* [erlogr](https://github.com/caroman/erlogr)
+* [erlosr](https://github.com/caroman/erlosr)
+* [erlgeom](https://github.com/caroman/erlgeom) (forked from [Couchbase's repo](https://github.com/couchbaselabs/erlgeom))
+
+
+### C Sources [&#x219F;](#table-of-contents)
+
+The C source code from the GDAL and GEOS bits used so far in lgeo are documented here:
+
+* [GDAL API](http://gdal.org/1.11/gdal_8h.html)
+* [GDAL Tutorial](http://gdal.org/1.11/gdal_tutorial.html)
+* [OGR API](http://gdal.org/1.11/ogr/ogr__api_8h.html)
+* [OGR Tutorial](http://gdal.org/1.11/ogr/ogr_apitut.html)
+* [OSR API](http://gdal.org/1.11/ogr/classOGRSpatialReference.html)
+* [OSR Tutorial](http://gdal.org/1.11/ogr/osr_tutorial.html)
+* GEOS API
+  * [geom](http://geos.osgeo.org/doxygen/namespacegeos_1_1geom.html)
+  * [index](http://geos.osgeo.org/doxygen/namespacegeos_1_1index.html)
+  * [io](http://geos.osgeo.org/doxygen/namespacegeos_1_1io.html)
 
 
 ## Installation [&#x219F;](#table-of-contents)
