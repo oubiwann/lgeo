@@ -1,0 +1,107 @@
+== ogr.layer ==
+noop/0
+
+== ogr.geometry ==
+noop/0
+
+== ogr.field-defn ==
+noop/0
+
+== ogr.feature-defn ==
+noop/0
+
+== ogr.feature ==
+noop/0
+
+== ogr.driver ==
+get-name/1
+get-by-name/1
+get-by-index/1
+get/1
+
+== ogr.data-source ==
+noop/0
+
+== lgeo_osr ==
+export_to_wkt/1
+import_from_epsg/1
+init/0
+
+== lgeo_ogr ==
+open/2
+open/1
+get_driver_by_name/1
+get_driver/1
+l_reset_reading/1
+l_get_layer_defn/1
+l_get_next_feature/1
+l_get_feature_count/1
+l_get_feature/2
+fld_get_type/1
+fld_get_name_ref/1
+fd_get_geom_type/1
+fd_get_fields_type/1
+fd_get_fields_name/1
+fd_get_field_defn/2
+fd_get_field_count/1
+f_get_geometry_ref/1
+f_get_geometry/1
+f_get_fields/1
+g_export_to_wkt/1
+g_export_to_wkb/1
+dr_get_name/1
+ds_get_layer_count/1
+ds_get_layer/2
+init/0
+
+== lgeo_geos_io ==
+wktwriter_write/2
+wktwriter_create/0
+wktreader_read/2
+wktreader_create/0
+wkbwriter_writehex/2
+wkbwriter_write/2
+wkbwriter_create/0
+wkbreader_readhex/2
+wkbreader_read/2
+wkbreader_create/0
+init/0
+
+== lgeo_geos_index ==
+strtree_query/2
+strtree_iterate/1
+strtree_insert/3
+strtree_create/0
+init/0
+
+== lgeo_geos_geom ==
+from_geom/1
+to_geom/1
+topology_preserve_simplify/2
+is_valid/1
+intersects/2
+intersection/2
+get_centroid/1
+disjoint/2
+init/0
+
+== lgeo_gdal ==
+open/2
+open/1
+get_version_info/1
+init/0
+
+== lgeo-util ==
+get-so-file/1
+
+== geos.geom.geometry ==
+topology-preserve-simplify/2
+intersect?/2
+
+== gdal.dataset ==
+open/2
+open/1
+
+== gdal ==
+open/2
+open/1

@@ -1,0 +1,347 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>lgeo - User Guide</title>
+
+    <link href="css/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="css/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="js/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages([null]);
+        });
+      </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <div class="content"><span class="title">lgeo - User Guide</span></div>
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <div class="content">
+        <div class="logo">
+        </div>
+        <span class="title">lgeo - User Guide</span></div>
+        <div class="lang-selector">
+              <a href="#" data-language-name=""></a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://github.com/oubiwann/lgeo/'>View the source</a></li>
+            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="introduction">Introduction</h1>
+
+<p><em>User Guide: LFE/Erlang GIS Bindings for GDAL, OGR, &amp; GEOS</em></p>
+
+<p><a href="images/lgeo-1000x.png"><img src="images/lgeo-250x.png" /></a></p>
+
+<h2 id="about-lgeo">About lgeo</h2>
+
+<p>This project is an experiment for solving GIS problems on the Erlang VM, particularly, doing so in LFE.</p>
+
+<p>It is based on the work originally done by <a href="https://github.com/caroman">@caroman</a> in his <a href="https://github.com/caroman/erlogr">erlogr</a> project. Unfortunately, that code base was written for Erlang R13 and hasn&rsquo;t been updated for 18.x (neither, it seems, does it work on 15.x). The erlogr project focused entirely upon OGR, the vector part of GDAL. I&rsquo;m still trying to sort out the Erlang C ports for OGR, but I have a greater interest in the raster side of things (e.g., satellite data), so I&rsquo;m going to be putting most of my efforts into getting a few bits of GDAL-proper up and runnnig. <a href="https://github.com/caroman">@caroman</a> also worked on two other Erlang GIS projects &ndash; both of which are being brought into lgeo (more details below in the <a href="#erlang-sources-">Erlang Sources</a> section).</p>
+
+<p>The only functions from the erlogr project that were written in Erlang were NIF wrappers. In lgeo, these have been rewritten in LFE (essentially one line of code, each). Additionally, though, lgeo is providing NIF wrappers organized along the same lines as the related <a href="#c-sources-">C++ libraries</a>, and to a lesser extent, the <a href="http://gdal.org/python/">Python bindings</a>. LFE/Erlang doesn&rsquo;t have namespaces, though, so this is &ldquo;faked&rdquo; though a dotted file/module naming convention, such as <code class="prettyprint">gdal.dataset</code> and functions like <code class="prettyprint">gdal.dataset:open</code>.</p>
+
+<h2 id="erlang-sources">Erlang Sources</h2>
+
+<p>The Erlang projects whose code was converted to LFE, and in that form provided the basis
+for the lgeo project, as as follows:</p>
+
+<ul>
+<li><a href="https://github.com/caroman/erlogr">erlogr</a></li>
+<li><a href="https://github.com/caroman/erlosr">erlosr</a></li>
+<li><a href="https://github.com/caroman/erlgeom">erlgeom</a> (forked from <a href="https://github.com/couchbaselabs/erlgeom">Couchbase&rsquo;s repo</a>)</li>
+</ul>
+
+<h2 id="c-sources">C Sources</h2>
+
+<p>The C source code from the GDAL and GEOS bits used so far in lgeo are documented here:</p>
+
+<ul>
+<li><a href="http://gdal.org/1.11/gdal_8h.html">GDAL API</a></li>
+<li><a href="http://gdal.org/1.11/gdal_tutorial.html">GDAL Tutorial</a></li>
+<li><a href="http://gdal.org/1.11/ogr/ogr__api_8h.html">OGR API</a></li>
+<li><a href="http://gdal.org/1.11/ogr/ogr_apitut.html">OGR Tutorial</a></li>
+<li><a href="http://gdal.org/1.11/ogr/classOGRSpatialReference.html">OSR API</a></li>
+<li><a href="http://gdal.org/1.11/ogr/osr_tutorial.html">OSR Tutorial</a></li>
+<li>GEOS API
+
+<ul>
+<li><a href="http://geos.osgeo.org/doxygen/namespacegeos_1_1geom.html">geom</a></li>
+<li><a href="http://geos.osgeo.org/doxygen/namespacegeos_1_1index.html">index</a></li>
+<li><a href="http://geos.osgeo.org/doxygen/namespacegeos_1_1io.html">io</a></li>
+</ul></li>
+</ul>
+
+<h2 id="conventions">Conventions</h2>
+
+<p>We use styled call-outs to provide immediate visual cues about the nature of
+the information being shared.</p>
+
+<p>These are as follows:</p>
+
+<aside class="info">
+This style indicates useful information, background, or other insights.
+</aside>
+
+<aside class="success">
+This style indicates a best practice, good usage, and other tips for success.
+</aside>
+
+<aside class="caution">
+This style indicates one should use caution or that behaviour may not be as
+expected
+</aside>
+
+<aside class="danger">
+This style indicates information that could cause errors if ignored.
+</aside>
+
+<h2 id="api-organization">API Organization</h2>
+
+<p>There are four main &ldquo;namespaces&rdquo; for the lgeo project:</p>
+
+<ul>
+<li><code class="prettyprint">lgeo</code>/<code class="prettyprint">lgeo.*</code> - top-level modules and function that relate specifically to
+the lgeo project</li>
+<li><code class="prettyprint">gdal</code>/<code class="prettyprint">gdal.*</code> - modules for functions from GDAL (specifically, <code class="prettyprint">gdal.h</code>)</li>
+<li><code class="prettyprint">ogr</code>/<code class="prettyprint">ogr.*</code> - modules for functions from OGR (specifically, <code class="prettyprint">ogr_api.h</code>
+and <code class="prettyprint">ogr_srs_api.h</code>)</li>
+<li><code class="prettyprint">geos</code>/<code class="prettyprint">geos.*</code> - modules for functions from GEOS (specifically, <code class="prettyprint">geos_c.h</code>)</li>
+</ul>
+
+<p>Note that it may become necessary in the future to include additional pseudo-namespaces (e.g., for
+the <a href="https://trac.osgeo.org/proj/">PROJ4 library</a>).</p>
+
+<p>The LFE NIF wrappers of the form <code class="prettyprint">lgeo_*</code> are not intended to be used directly (though one certianly may do so). It is preferable to use the dotted modules.</p>
+
+          <h1 id="setup">Setup</h1>
+
+<h2 id="dependencies">Dependencies</h2>
+
+<ul>
+<li>GDAL</li>
+<li>GEOS</li>
+<li>Erlang</li>
+<li><code class="prettyprint">rebar3</code></li>
+<li>GNU Make</li>
+</ul>
+
+<p>You will need to have the GDAL and GEOS libraries installed. Linux GIS packages usually provide GDAL 1.11.x, as such that is the version supported (tested) by this library. Similarly for GEOS 3.4.2. The LFE in this project was written against Erlang 18.1, though every effort was made to ensure backwards-compatibility through version 15 of Erlang. If you find otherwise, that is a bug and I&rsquo;d appreciate a issue getting created for it :-)</p>
+
+<h2 id="installation">Installation</h2>
+
+<h3 id="linux-bsd">Linux/BSD</h3>
+
+<blockquote>
+<p>Build it with:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>make
+</code></pre>
+
+<blockquote>
+<p>Run tests with:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>make check
+</code></pre>
+
+<p>With the Linux/BSD dependencies installed, &ldquo;installation&rdquo; is as simple as building lgeo in your local directory, per the examples to the right.</p>
+
+<h3 id="on-windows">On Windows</h3>
+
+<blockquote>
+<p>Windows ENV variables so that GDAL and Erlang can be found:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>SET INCLUDE=%INCLUDE%;C:\cygwin\opt\gdal\include;C:\cygwin\opt\gdal\include\gdal
+SET LIB=%LIB%;C:\cygwin\opt\gdal\lib
+SET PATH=%PATH%;C:\cygwin\opt\gdal\bin;C:\erl5.9.1\bin
+
+SET INCLUDE=%INCLUDE%;C:\cygwin\opt\geos\include
+SET LIB=%LIB%;C:\cygwin\opt\geos\lib
+SET PATH=%PATH%;C:\cygwin\opt\geos\bin
+</code></pre>
+
+<blockquote>
+<p>And finally compile the whole thing:</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>make
+</code></pre>
+
+<p>You need to have GDAL installed (e.g., <code class="prettyprint">C:\cygwin\opt\gdal</code>) as well as GEOS (e.g., <code class="prettyprint">C:\cygwin\opt\geos</code>).</p>
+
+<p>Open a shell which has all compilers and the MSVC environment set up (e.g. the
+Windows SDK 7.1 Command Prompt). Then follow the examples to the right.</p>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>TBD</p>
+
+          <h1 id="api-reference">API Reference</h1>
+
+<p>The current API documentation for the lgeo modules and functions is located here:</p>
+
+<ul>
+<li><a href="http://oubiwann.github.com/lgeo/current/api">lgeo API docs</a></li>
+</ul>
+
+<p>For previous versions of the API reference documentation, click the &ldquo;<a href="#previous-versions">Previous Versions</a>&rdquo; link in the menu on the left.</p>
+
+          <h1 id="api-lgeo">API: lgeo</h1>
+
+<p>TBD</p>
+
+<aside class="info">
+[info]
+</aside>
+
+<h2 id="metadata">METADATA</h2>
+
+<aside class="caution">
+[caution]
+</aside>
+
+<h2 id="bull-xxx">&bull; XXX</h2>
+
+<p>TBD</p>
+
+<h2 id="bull-yyy">&bull; YYY</h2>
+
+<p>TBD</p>
+
+<h2 id="bull-zzz">&bull; ZZZ</h2>
+
+<p>TBD</p>
+
+          <h1 id="api-gdal">API: GDAL</h1>
+
+<p>TBD</p>
+
+<aside class="info">
+[info]
+</aside>
+
+<h2 id="metadata">METADATA</h2>
+
+<aside class="caution">
+[caution]
+</aside>
+
+<h2 id="bull-xxx">&bull; XXX</h2>
+
+<p>TBD</p>
+
+<h2 id="bull-yyy">&bull; YYY</h2>
+
+<p>TBD</p>
+
+<h2 id="bull-zzz">&bull; ZZZ</h2>
+
+<p>TBD</p>
+
+          <h1 id="api-ogr">API: OGR</h1>
+
+<p>TBD</p>
+
+<aside class="info">
+[info]
+</aside>
+
+<h2 id="metadata">METADATA</h2>
+
+<aside class="caution">
+[caution]
+</aside>
+
+<h2 id="bull-xxx">&bull; XXX</h2>
+
+<p>TBD</p>
+
+<h2 id="bull-yyy">&bull; YYY</h2>
+
+<p>TBD</p>
+
+<h2 id="bull-zzz">&bull; ZZZ</h2>
+
+<p>TBD</p>
+
+          <h1 id="api-geos">API: GEOS</h1>
+
+<p>TBD</p>
+
+<aside class="info">
+[info]
+</aside>
+
+<h2 id="metadata">METADATA</h2>
+
+<aside class="caution">
+[caution]
+</aside>
+
+<h2 id="bull-xxx">&bull; XXX</h2>
+
+<p>TBD</p>
+
+<h2 id="bull-yyy">&bull; YYY</h2>
+
+<p>TBD</p>
+
+<h2 id="bull-zzz">&bull; ZZZ</h2>
+
+<p>TBD</p>
+
+          <h1 id="previous-versions">Previous Versions</h1>
+
+<p>Documentation is available for all previous releases:</p>
+
+<p>User Guide:</p>
+
+<ul>
+<li><a href="../../current/user-guide/">Development version</a></li>
+</ul>
+
+<p>API Reference:</p>
+
+<ul>
+<li><a href="../../current/api/">Development version</a></li>
+</ul>
+
+          <h1 id="license">License</h1>
+
+<ul>
+<li>Copyright © 2011 Couchbase, Inc.</li>
+<li>Copyright © 2012 Carlos Roman</li>
+<li>Copyright © 2016 Duncan McGreggor</li>
+</ul>
+
+<p>Distributed under the Apache License Version 2.0.</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name=""></a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
