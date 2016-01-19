@@ -6,7 +6,7 @@
 [lgeo-logo]: resources/images/lgeo-250x.png
 [lgeo-logo-large]: resources/images/lgeo-1000x.png
 
-*LFE/Erlang GIS Bindings for GDAL/OGR*
+*LFE/Erlang GIS Bindings for GDAL, OGR, & GEOS*
 
 
 #### Table of Contents
