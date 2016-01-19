@@ -26,6 +26,8 @@ $ make
 $ make check
 ```
 
+With the Linux/BSD dependencies installed, "installation" is as simple as building lgeo in your local directory, per the examples to the right.
+
 
 ### On Windows
 
@@ -47,11 +49,10 @@ SET PATH=%PATH%;C:\cygwin\opt\geos\bin
 $ make
 ```
 
-
-You need to have GDAL installed, let's say it was installed to `C:\cygwin\opt\gdal`.
+You need to have GDAL installed (e.g., `C:\cygwin\opt\gdal`) as well as GEOS (e.g., `C:\cygwin\opt\geos`).
 
 Open a shell which has all compilers and the MSVC environment set up (e.g. the
-Windows SDK 7.1 Command Prompt).
+Windows SDK 7.1 Command Prompt). Then follow the examples to the right.
 
 
 ## Configuration
