@@ -12,16 +12,8 @@
 #### Table of Contents
 
 * [Introduction](#introduction-)
-  * [Project Structure](#project-structure-)
-  * [Erlang Sources](#erlang-sources-)
-  * [C Sources](#c-sources-)
-* [Dependencies](#dependencies-)
-* [Installation](#installation-)
-  * [Linux/BSD](#linuxbsd-)
-  * [Windows](#on-windows-)
-* [Configuration](#configuration-)
-* [Examples](#examples-)
 * [Documentation](#documentation-)
+* [Example Usage](#example-usage-)
 * [License](#license-)
 
 
@@ -32,116 +24,27 @@
 
 This project is an experiment for solving GIS problems on the Erlang VM, particularly, doing so in LFE.
 
-It is based on the work originally done by [@caroman](https://github.com/caroman) in his [erlogr](https://github.com/caroman/erlogr) project. Unfortunately, that code base was written for Erlang R13 and hasn't been updated for 18.x (neither, it seems, does it work on 15.x). The erlogr project focused entirely upon OGR, the vector part of GDAL. I'm still trying to sort out the Erlang C ports for OGR, but I have a greater interest in the raster side of things (e.g., satellite data), so I'm going to be putting most of my efforts into getting a few bits of GDAL-proper up and runnnig. [@caroman](https://github.com/caroman) also worked on two other Erlang GIS projects -- both of which are being brought into lgeo (more details below in the [Erlang Sources](#erlang-sources-) section).
+It is based on the work originally done by [@caroman](https://github.com/caroman) in his [erlogr](https://github.com/caroman/erlogr) project. For more details on:
 
-The only functions from the erlogr project that were written in Erlang were NIF wrappers. In lgeo, these have been rewritten in LFE (essentially one line of code, each). Additionally, though, lgeo is providing NIF wrappers organized along the same lines as the related [C++ libraries](#c-sources-), and to a lesser extent, the [Python bindings](http://gdal.org/python/). LFE/Erlang doesn't have namespaces, though, so this is "faked" though a dotted file/module naming convention, such as ``gdal.dataset`` and functions like ``gdal.dataset:open``.
+* the various projects that have been woven together in lgeo,
+* the organization of the modules and namespaces,
+* the C/C++ libraries used to create the LFE/Erlang NIFs,
+* dependency, installation, and setup information
+* detailed usage examples (user guide), and
+* API documentation,
 
-
-### Project Structure [&#x219F;](#table-of-contents)
-
-There are four main "namespaces" for the lgeo project:
-
-* ``lgeo``/``lgeo.*`` - top-level modules and function that relate specifically to
-  the lgeo project
-* ``gdal``/``gdal.*`` - modules for functions from GDAL (specifically, ``gdal.h``)
-* ``ogr``/``ogr.*`` - modules for functions from OGR (specifically, ``ogr_api.h``
-  and ``ogr_srs_api.h``)
-* ``geos``/``geos.*`` - modules for functions from GEOS (specifically, ``geos_c.h``)
-
-Note that it may become necessary in the future to include additional pseudo-namespaces (e.g., for
-the [PROJ4 library](https://trac.osgeo.org/proj/)).
-
-The LFE NIF wrappers of the form ``lgeo_*`` are not intended to be used directly (though one certianly may do so). It is preferable to use the dotted modules.
+be sure to read the documentation (links below).
 
 
-### Erlang Sources [&#x219F;](#table-of-contents)
+## Documentation [&#x219F;](#table-of-contents)
 
-The Erlang projects whose code was converted to LFE, and in that form provided the basis
-for the lgeo project, as as follows:
-
-* [erlogr](https://github.com/caroman/erlogr)
-* [erlosr](https://github.com/caroman/erlosr)
-* [erlgeom](https://github.com/caroman/erlgeom) (forked from [Couchbase's repo](https://github.com/couchbaselabs/erlgeom))
+* [API docs](http://oubiwann.github.com/lgeo/current/api) - forthcoming ...
+* [User Guide](http://oubiwann.github.com/lgeo/current/user-guide)
 
 
-### C Sources [&#x219F;](#table-of-contents)
+## Example Usage [&#x219F;](#table-of-contents)
 
-The C source code from the GDAL and GEOS bits used so far in lgeo are documented here:
-
-* [GDAL API](http://gdal.org/1.11/gdal_8h.html)
-* [GDAL Tutorial](http://gdal.org/1.11/gdal_tutorial.html)
-* [OGR API](http://gdal.org/1.11/ogr/ogr__api_8h.html)
-* [OGR Tutorial](http://gdal.org/1.11/ogr/ogr_apitut.html)
-* [OSR API](http://gdal.org/1.11/ogr/classOGRSpatialReference.html)
-* [OSR Tutorial](http://gdal.org/1.11/ogr/osr_tutorial.html)
-* GEOS API
-  * [geom](http://geos.osgeo.org/doxygen/namespacegeos_1_1geom.html)
-  * [index](http://geos.osgeo.org/doxygen/namespacegeos_1_1index.html)
-  * [io](http://geos.osgeo.org/doxygen/namespacegeos_1_1io.html)
-
-
-## Dependencies [&#x219F;](#table-of-contents)
-
-* GDAL
-* GEOS
-* Erlang
-* ``rebar3``
-* GNU Make
-
-You will need to have the GDAL and GEOS libraries installed. Linux GIS packages usually provide GDAL 1.11.x, as such that is the version supported (tested) by this library. Similarly for GEOS 3.4.2. The LFE in this project was written against Erlang 18.1, though every effort was made to ensure backwards-compatibility through version 15 of Erlang. If you find otherwise, that is a bug and I'd appreciate a issue getting created for it :-)
-
-
-## Installation [&#x219F;](#table-of-contents)
-
-### Linux/BSD [&#x219F;](#table-of-contents)
-
-Build it with:
-
-```bash
-$ make
-```
-
-Run tests with:
-
-```bash
-$ make check
-```
-
-
-### On Windows [&#x219F;](#table-of-contents)
-
-You need to have GDAL installed, let's say it was installed to `C:\cygwin\opt\gdal`.
-
-Open a shell which has all compilers and the MSVC environment set up (e.g. the
-Windows SDK 7.1 Command Prompt).
-
-Now set it up so that GDAL and Erlang can be found:
-
-```cmd
-SET INCLUDE=%INCLUDE%;C:\cygwin\opt\gdal\include;C:\cygwin\opt\gdal\include\gdal
-SET LIB=%LIB%;C:\cygwin\opt\gdal\lib
-SET PATH=%PATH%;C:\cygwin\opt\gdal\bin;C:\erl5.9.1\bin
-
-SET INCLUDE=%INCLUDE%;C:\cygwin\opt\geos\include
-SET LIB=%LIB%;C:\cygwin\opt\geos\lib
-SET PATH=%PATH%;C:\cygwin\opt\geos\bin
-```
-
-And finally compile the whole thing:
-
-```bash
-$ make
-```
-
-
-## Configuration [&#x219F;](#table-of-contents)
-
-TBD
-
-
-## Examples [&#x219F;](#table-of-contents)
-
-For more examples and API docs, see the [Documentation](#documentation-).
+The code selections below are just teasers. For more comprehensive examples, visit the [User Guide](http://oubiwann.github.com/lgeo/user-guide).
 
 Here's an example session in the LFE REPL:
 
@@ -205,7 +108,7 @@ OGR operations:
 
 ```
 
-Old Erlang example:
+Old Erlang example (going away soon):
 
 ```erlang
     1> Driver = erlogr:get_driver(0),
@@ -227,12 +130,6 @@ Old Erlang example:
     <<1,3,0,0,0,1,0,0,0,6,0,0,0,136,181,111,88,251,134,214,63,
       72,23,93,116,209,5,239,191,...>>
 ```
-
-
-## Documentation [&#x219F;](#table-of-contents)
-
-* [API docs]()
-* [User Guide](http://oubiwann.github.com/lgeo)
 
 
 ## License [&#x219F;](#table-of-contents)
