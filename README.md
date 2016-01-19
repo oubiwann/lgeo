@@ -232,7 +232,7 @@ Old Erlang example:
 ## Documentation [&#x219F;](#table-of-contents)
 
 * [API docs]()
-* [Usage docs]()
+* [User Guide](http://oubiwann.github.com/lgeo)
 
 
 ## License [&#x219F;](#table-of-contents)
