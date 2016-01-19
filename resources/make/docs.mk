@@ -38,7 +38,9 @@ publish-docs: $(DOCS_PROD_DIR) docs setup-temp-repo
 # files. See the project rebar.config file for more info.
 api-docs:
 	@echo "\nBuilding API docs ...\n"
-	@echo "rebar3 lfe lodox"
+	@rm -rf $(API_BUILD_DIR)
+	@rebar3 lfe lodox
+	@mv doc $(API_BUILD_DIR)
 
 SLATE_GIT_HACK = $(DOCS_DIR)/.git
 

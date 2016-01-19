@@ -38,7 +38,7 @@ be sure to read the documentation (links below).
 
 ## Documentation [&#x219F;](#table-of-contents)
 
-* [API docs](http://oubiwann.github.com/lgeo/current/api) - forthcoming ...
+* [API docs](http://oubiwann.github.com/lgeo/current/api)
 * [User Guide](http://oubiwann.github.com/lgeo/current/user-guide)
 
 
