@@ -11,6 +11,7 @@ toc_footers:
 includes:
   - intro
   - setup
+  - api_ref
   - api_lgeo
   - api_gdal
   - api_ogr
