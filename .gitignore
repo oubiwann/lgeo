@@ -12,3 +12,4 @@ priv/*
 docs/user-guide/build
 docs/master/current
 docs/user-guide/Gemfile.lock
+docs/build
