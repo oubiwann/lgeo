@@ -9,3 +9,6 @@ _build/*
 rebar.lock
 c_src/*.d
 priv/*
+docs/user-guide/build
+docs/master/current
+docs/user-guide/Gemfile.lock
