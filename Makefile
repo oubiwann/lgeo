@@ -1,28 +1,14 @@
+ROOT_DIR = $(shell pwd)
+REPO = $(shell git config --get remote.origin.url)
 LFE_BIN = _build/default/lib/lfe/bin
 LFE = $(LFE_BIN)/lfe
 
 all: build
 
-build:
-	rebar3 compile
-
-repl:
-	@$(LFE)
-
-check:
-	rebar3 eunit -v
-
-check-quiet:
-	rebar3 eunit
-
-clean:
-	rebar3 clean
-	rm -fr priv
-
-clean-all: clean
+clean-all: clean clean-docs
 	rebar3 lfe clean
 
-dialyzer-build: build
-	dialyzer --build_plt --output_plt erlogr.plt \
-        -o dialyzer.build \
-        -r src ebin
+include resources/make/code.mk
+include resources/make/docs.mk
+
+.PHONY: all clean-all
